@@ -1,0 +1,29 @@
+.card{
+    line-height: 2em;
+  }
+  
+  .hide {
+    display: none;
+  }
+  
+  li:hover{
+    background-color:#043eff;
+  }
+  
+  li:active{
+    background-color: rgb(210, 243, 243);
+  }
+  
+  /* for mobile the search history could be removed to prevent clutter
+  /* @media only screen and (max-width: 767px){
+    #card-search {
+      display: none!important;
+    }
+  } */
+  
+  /* we want search-div to be max vh except on mobile */
+  /* @media only screen and (min-width: 768px){
+    #search-div {
+      min-height: 100vh;
+    }
+  } */
