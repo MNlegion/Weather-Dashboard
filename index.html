@@ -16,22 +16,23 @@
     <header class="bg-secondary text-center">
         <h1 class="text-light m-auto">Weather Dashboard</h1>
     </header>
+
+    <!-- Search for a City Column -->
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-5 col-lg-4 col-xl-3 pt-4" id="search-div">
                 <form class="form-inline mb-3" id="city-search">
                     <h3 class="mr-3">Search for a City: </h3>
-                    <input type="text" class="form-control" id="search-input">
-                    <button type="submit" class="btn btn-dark form-control"><i
-                            class="fa-solid fa-magnifying-glass-location"></i></button>
+                    <input type="text" class="form-control" name="search-input" placeholder="Enter City Name">
+                    <button type="submit" class="btn btn-dark form-control" id="search-btn">
+                        <i class="fa-solid fa-magnifying-glass-location"></i></button>
                 </form>
 
                 <!-- Dynamically generated ul based on users search history -->
                 <div class="card hide" id="card-search">
                     <ul class="list-group list-group-flush" id="search-history">
-
-
-                    </ul>
+                    
+                    </ul> 
                 </div>
             </div>
 

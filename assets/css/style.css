@@ -1,4 +1,4 @@
-.card{
+/* .card{
     line-height: 2em;
   }
   
@@ -12,7 +12,7 @@
   
   li:active{
     background-color: rgb(210, 243, 243);
-  }
+  } */
   
   /* for mobile the search history could be removed to prevent clutter
   /* @media only screen and (max-width: 767px){
@@ -27,3 +27,8 @@
       min-height: 100vh;
     }
   } */
+
+  .list-group {
+    font-size: 30px;
+    color: black;
+  }
