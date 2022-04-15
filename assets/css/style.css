@@ -15,11 +15,11 @@
   } */
   
   /* for mobile the search history could be removed to prevent clutter
-  /* @media only screen and (max-width: 767px){
+  @media only screen and (max-width: 767px){
     #card-search {
       display: none!important;
     }
-  } */
+  }
   
   /* we want search-div to be max vh except on mobile */
   /* @media only screen and (min-width: 768px){
@@ -31,4 +31,8 @@
   .list-group {
     font-size: 30px;
     color: black;
+    background-color: darkgray;
+    text-align: center;
   }
+
+ 
