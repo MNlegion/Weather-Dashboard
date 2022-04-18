@@ -3,6 +3,7 @@
 
 var citySearchEl = document.getElementById("city-search");
 var cityFormEl = document.getElementById("city-form");
+var searchHistoryEl = document.getElementById("search-history")
 
 var APIkey = "7dd3d9ee3fd3a5e33bd10913e8e1557b";
 var cities = []
@@ -23,6 +24,23 @@ var loadCities = function() {
 
 var saveCities = function() {
     localStorage.setItem("cities", JSON.stringify(cities));
+}
+
+var displaySearchedCities = function(city) {
+    var cityCardEl = document.createElement("div");
+    cityCardEl.setAttribute("class", "card");
+    var cityCardNameEl = document.createElement("div");
+    cityCardNameEl.setAttribute("class", "card-body searched-city");
+    cityCardNameEl.textContent = city;
+    
+    cityCardEl.appendChild(cityCardNameEl)
+
+    cityCardEl.addEventListener("click", function () {
+        getCityData(city)
+    });
+
+    searchHistoryEl.appendChild(cityCardEl)
+
 }
 
 
