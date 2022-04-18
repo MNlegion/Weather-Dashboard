@@ -104,6 +104,114 @@ var displayDailyData = function(city, data) {
     
 };
 
+var displayForecastData = function(data) {
+    // console.log(data) 
+    forecastContainerEl.textContent = "";
+    var forecastHeaderEl = document.getElementById("five-day");
+    forecastHeaderEl.textContent = "5-day Forecast:"
+
+    //Display for 5 day forecast
+    for (var i=1; i < 6; i++) {
+        var tempForecast = Math.round(data.daily[i].temp.day);
+        var humidityForecast = data.daily[i].humidity;
+        var iconForecast = data.daily[i].weather[0].icon;
+    
+    //create individual cards for each day of weather
+    var cardEl = document.createElement("div");
+    cardEl.setAttribute("class","card col-xl-2 col-md-5 col-sm-10 mx-3 my-2 bg-primary text-white text-center");
+
+    var cardBodyEl = document.createElement("div");
+    cardBodyEl.setAttribute("class","card-body");
+
+    var cardDateEl = document.createElement("h6");
+    cardDateEl.textContent = moment().add(i, 'days').format("L");
+
+    var cardIconEl = document.createElement("img");
+    cardIconEl.setAttribute("src", "https://openweathermap.org/img/wn/" + iconForecast + "@2x.png")
+
+    var cardTempEl = document.createElement("p");
+    cardTempEl.setAttribute("class", "card-text");
+    cardTempEl.textContent = "Temperature:  " + tempForecast + "°F";
+
+    var cardHumidEl = document.createElement("p")
+    cardHumidEl.setAttribute("class", "card-text");
+    cardHumidEl.textContent = "Humidity:  " + humidityForecast + "%";
+    
+    //append to card body
+    cardBodyEl.appendChild(cardDateEl)
+    cardBodyEl.appendChild(cardIconEl)
+    cardBodyEl.appendChild(cardTempEl)
+    cardBodyEl.appendChild(cardHumidEl)
+    
+    //append to card and container
+    cardEl.appendChild(cardBodyEl);
+    forecastContainerEl.appendChild(cardEl);
+    
+    //Form Reset
+    cityFormEl.reset()
+
+    }
+};
+
+var getCityData = function(city) {
+    event.preventDefault();
+    
+    var cityInfoUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIkey;
+
+    fetch(cityInfoUrl).then(function(response) {
+        if (response.ok) {
+            response.json().then(function(data) {
+            console.log(data);
+
+    var cityName = data.name;
+    var latitude = data.coord.lat;
+    var longitude = data.coord.lon;
+    
+    //would like to update this to only show a max amount of prior searches
+    var prevSearch = cities.includes(cityName)
+    if (!prevSearch) {
+        cities.push(cityName)
+        saveCities()
+        displaySearchedCities(cityName)
+    }
+
+    getWeatherData(cityName,latitude,longitude);
+
+    });
+
+    //invalid message if no city found
+    } else { 
+        alert("Please enter a city!")
+        cityFormEl.reset()
+     }
+   });
+};
+
+var getWeatherData = function(city,latitude,longitude) { 
+
+    var forecastUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&units=imperial&exclude=minutely,hourly&appid=" + APIkey;
+        
+    fetch(forecastUrl).then(function(response) {
+        response.json().then(function(data) {
+            console.log(data);
+
+        displayDailyData(city, data);
+        displayForecastData(data);
+
+        });
+    });
+};
+
+//prior city searches load
+loadCities()
+
+//user input listener
+cityFormEl.addEventListener("submit", function() {
+    cityInput = citySearchEl.value.trim();
+    getCityData(cityInput);
+})
+
+
 
 
 
