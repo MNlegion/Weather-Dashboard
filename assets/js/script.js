@@ -153,9 +153,8 @@ var displayForecastData = function (data) {
     }
 };
 
-var getCityData = function(event) {
+var getCityData = function(city) {
     event.preventDefault();
-
     var cityInfoUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIkey;
 
     fetch(cityInfoUrl).then(function (response) {
